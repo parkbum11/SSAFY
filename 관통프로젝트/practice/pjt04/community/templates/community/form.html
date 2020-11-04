@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="{% url 'community:create' %}" method='POST'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type='input'>Submit</button>
+    </form>
+    <a href="{% url 'community:review_list' %}">[BACK]</a>
+{% endblock content %}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Page</title>
+</head>
+<body>
+    {% if request.user.is_authenticated %}
+        <h4>Hello, {{ user.username }}</h4>
+        <a href="{% url 'accounts:logout' %}">Log out</a>
+    {% else %}
+        <a href="{% url 'accounts:signup' %}">Sign up</a>
+        <a href="{% url 'accounts:login' %}">Log in</a>
+    {% endif %}
+    <br>
+    <a href="{% url 'community:review_list' %}">Review List</a>
+
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>

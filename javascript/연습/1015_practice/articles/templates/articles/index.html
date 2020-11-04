@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">Articles</h1>
+  <a href="{% url 'articles:create' %}">NEW</a>
+  <hr>
+  {% for article in articles %}
+    <p><b>작성자 : <a href="{% url 'accounts:profile' article.user.username %}">{{ article.user }}</a></b></p>
+    <p>글 번호: {{ article.pk }}</p>
+    <p>글 제목: {{ article.title }}</p>
+    <p>글 내용: {{ article.content }}</p>
+    {% comment %} id값으로 줬을때 pk를 다 달리줘야되고 다른 id랑 겹치는 경우가 생길 수도 있으니 like-form 클래스를 이용해 {% endcomment %}
+    {% comment %} 모든 폼정보를 가져옴!(querySelectorAll) {% endcomment %}
+    {% comment %} form태그에 data속성을 주면 나중에 js에서 쓸 수 있음 {% endcomment %}
+    <form class="d-inline like-form" data-article-id='{{article.pk}}'>
+      {% csrf_token %}
+      {% if user in article.like_users.all %}
+        <button class="btn btn-link">
+        {% comment %} id 기반으로 색을 어떻게 바꿀지 정하려고 id값을 지정해줌 {% endcomment %}
+          <i id='like-btn-{{article.pk}}' class="fas fa-heart fa-lg" style="color:crimson;"></i>
+        </button>
+      {% else %}
+        <button class="btn btn-link">
+          <i id='like-btn-{{article.pk}}' class="fas fa-heart fa-lg" style="color:black;"></i>
+        </button>
+      {% endif %}
+    </form>
+    {% comment %} span으로 감쌈, 명수만 감싼다! 저거만 바꿔주려고->  {% endcomment %}
+    <span id = 'like-count-{{article.pk}}'>{{ article.like_users.all|length }} </span> 명이 이 글을 좋아합니다.<br>
+    <a href="{% url 'articles:detail' article.pk %}">[detail]</a>
+    <hr>
+  {% endfor %}
+{% endblock %}
