@@ -5,5 +5,7 @@
 # 소요시간 : 1h
 # 푼 날짜 : 2020-10-24
 
-y = [[1,1,1,1] for _ in range(3)]
-print((1 << 5) - 1)
+a = [0 ,1, 2, 3]
+a.sort(reverse=True)
+a[0] = -1
+print(a)
