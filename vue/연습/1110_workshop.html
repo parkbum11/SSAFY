@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <select name="" id="">
+      <option value="all">전체</option>
+      <option value="doing">진행중</option>
+      <option value="done">완료</option>
+    </select>
+    <input @keyup.enter='addTodoList' type="text" v-model='todoInput'>
+    <button @click='addTodoList'>+</button>
+    <br>
+
+    <ul v-for="todo in todos">
+      <li v-if='todo.checkStatus === true'>
+        <input type="checkbox" id='checkbox' v-model='todos.checkStatus' checked @click>
+        <label for="todos.checkStatus"><del>{{ todo.title }}</del></label>
+      </li>
+      <li v-else>
+        <input type="checkbox" id='checkbox' v-model='todos.checkStatus'>
+        <label for="todos.checkStatus">{{ todo.title }}</label>
+      </li>
+    </ul>
+
+    <button>완료된 할 일 지우기</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        todoInput: '',
+        todos: [
+          { title: '건강설문', checkStatus: true }, 
+          { title: '홈워크', checkStatus: false },
+        ],
+      },
+      methods: {
+        addTodoList: function() {
+          this.todos.push({
+            title:this.todoInput,
+            checkStatus: false
+          })
+          this.todoInput = ''
+        }
+      },
+    })
+  </script>
+</body>
+</html>

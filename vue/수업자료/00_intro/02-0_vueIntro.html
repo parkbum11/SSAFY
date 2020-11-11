@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1. Vue Intro</title>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="app2"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    vueInstanceObject = {
+      // app.$el -> div#app
+      // el은 Vue Instance의 속성이다.
+      el: '#app',
+    }
+
+    const app = new Vue(vueInstanceObject)
+    console.log(app)
+
+    const app2 = new Vue({
+      el: '#app2',
+    })
+
+    console.log(app2)
+  </script>
+</body>
+</html>
