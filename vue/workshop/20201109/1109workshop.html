@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2>점심메뉴</h2>
+    <button @click="pickLunch">Pick One</button>
+    <button @click="closeLunch">Close</button>
+    <p>{{ lunchs[lunchIndex] }}</p>
+    
+    <div v-if="lunchIndex !== 0">
+      <h3>점심에 어울리는 후식메뉴</h3>
+      <button @click="pickAfterLunch">Pick One</button>
+      <p>{{ afterLunchs[afterLunchIndexx][afterLunchIndex] }}</p>
+    </div>
+    <hr>
+    <span>a</span>
+    <span>b</span>
+    <h2>로또</h2>
+    <button @click="getlottoNumbers">Get Lucky Numbers</button><br>
+    <br>
+    <span v-for="luckyNumber in luckyNumbers">{{ luckyNumber }}   </span>
+      <!-- inline tag를 써도 안됨 ㅠㅠ 일자 출력 하고 싶었슴 -->
+  </div>
+  
+  <!-- Vue.js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- Lodash -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        lunchs: ['plz push the button', '중식', '한식', '양식', '일식'],
+        lunchIndex: 0,
+        afterLunchs: [['plz push the button or plz pick lucn first'], ['만두', '탕수육', '칠리새우'], ['한식1', '한식2', '한식3'], ['양식1', '양식2', '양식3'], ['일식1', '일식2', '일식3']],
+        afterLunchIndex: 0,
+        afterLunchIndexx: 0,
+        luckyNumbers: [],
+      },
+      methods: {
+        pickLunch: function() {
+          this.lunchIndex = _.random(1, 4)
+        },
+        pickAfterLunch: function() {
+          this.afterLunchIndexx = this.lunchIndex
+          this.afterLunchIndex = _.random(0, 2)
+        },
+        closeLunch: function() {
+          this.lunchIndex = 0
+        },
+        getlottoNumbers: function() {
+          const lottoNumbers = _.range(1, 46)
+          this.luckyNumbers = _.sampleSize(lottoNumbers, 6)
+        },
+      },
+    })
+  </script>
+</body>
+</html>
