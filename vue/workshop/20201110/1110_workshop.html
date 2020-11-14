@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='app'>
+        <select>
+            <option value="">전체</option>
+            <option value="">진행중</option>
+            <option value="">완료</option>
+        </select>
+        <input type="text" @keyup.enter='addTodoList' v-model='todoInput'>
+        <button @click='addTodoList'>+</button>
+
+        <ul v-for='todolist in todolists'>
+            <li>
+                <input type="checkbox" v-model='todolist.checkedStatus'>
+                <span v-if='todolist.checkedStatus === true'><del>{{ todolist.title }}</del></span>
+                <span v-else>{{ todolist.title }}</span>
+            </li>
+        </ul>
+        <button @click='removeTodoList'>완료된 할 일 지우기</button>
+    </div>
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                todoInput: '',
+                todolists: [
+                    { title: '건강설문', checkedStatus: true },
+                    { title: '홈워크', checkedStatus: false },
+                ],
+            },
+            methods: {
+                addTodoList: function() {
+                    this.todolists.push({
+                        title: this.todoInput, checkedStatus: false
+                    })
+                    this.todoInput = ''
+                },
+                removeTodoList: function() {
+                    this.todolists = this.todolists.filter((todolist) => {
+                        return !todolist.checkedStatus
+                    })
+                }
+            },
+        })
+    </script>
+</body>
+</html>
