@@ -1,0 +1,59 @@
+<div class="jumbotron text-center text-white bg-dark">
+  <p class="lead mb-1">작성자 정보</p>
+  <h1 class="display-4">{{ person.username }}</h1>
+  <hr>
+  {% with followings=person.followings.all followers=person.followers.all %}
+  <p class="lead">
+    <span id="following-count">팔로잉 : {{ followings|length }}</span>
+    <span id="follow-count-{{ person.pk }}">/ 팔로워 : {{ followers|length }}</span>
+  </p>
+    <!-- 팔로우 버튼 -->
+    {% if request.user != person %}
+      <form class="d-line follow-user" data-user-id="{{ person.pk }}">
+        {% csrf_token %}
+        {% if request.user in followers %}
+          <button class="btn-secondary btn-lg follow-{{ person.pk }}" role="button">Unfollow</button>
+        {% else %}
+          <button class="btn-primary btn-lg follow-{{ person.pk }}" role="button">Follow</button>
+        {% endif %}
+      </form>
+    {% endif %}
+  {% endwith %}
+
+  <script>
+    const form = document.querySelector('.follow-user')
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault()
+
+      const userId = event.target.dataset.userId
+      const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+      axios.post(`http://127.0.0.1:8000/accounts/follow/${userId}/`, {}, {
+        headers : {
+          'X-CSRFToken': csrftoken
+        }
+      })
+      .then(function (res) {
+        console.log(res)
+        const count= res.data.count
+        const follow = res.data.follow
+
+        const followButton = document.querySelector(`.follow-${userId}`)
+        const followCount = document.querySelector(`#follow-count-${userId}`)
+
+        if (follow) {
+          followButton.style.background = '#6c757d'
+          followButton.style.borderColor = '#6c757d'
+          followButton.innerText = 'Unfollow'
+          followCount.innerText = `/ 팔로워 : ${count}`
+        } else {
+          followButton.style.background = '#007bff'
+          followButton.style.borderColor = '#007bff'
+          followButton.innerText = 'Follow'
+          followCount.innerText = `/ 팔로워 : ${count}`
+        }
+      })
+    })
+  </script>
+</div>

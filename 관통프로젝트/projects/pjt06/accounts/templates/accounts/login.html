@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<h1 class ="text-center my-5" >LogIn</h1>
+<div class="container bg-dark w-50  text-start">
+<form action="{% url 'accounts:login' %}" method = 'POST' class = 'text-white' >
+    {% csrf_token %}
+    <br>
+ {% bootstrap_form form %}
+<div class = 'text-center my-5'>
+<button type="submit" class="btn btn-primary btn-md  w-100">LogIn</button>
+</div>
+</form>
+<div class = 'text-center w-100 mb-3'>
+<a href="{% url 'accounts:signup'%}" class="btn btn-secondary btn-sm w-100 mb-3 ">SignUp</a>
+</div>
+</div>
+{% endblock content %}

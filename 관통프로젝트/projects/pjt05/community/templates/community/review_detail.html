@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class='text-center'>DETAIL</h2>
+  <h3>No. {{ review.pk }}</h3>
+  <hr>
+  <p>Title : {{ review.title }}</p>
+  <p>movie Title : {{ review.movie_title }}</p>
+  <p>Content: {{ review.content }}</p>
+  <p>Rank: {{ review.rank }}</p>
+  <p>Created at: {{ review.created_at|date:"SHORT_DATE_FORMAT" }}</p>
+  <p>Updated at: {{ review.updated_at|date:"M j, Y" }}</p>
+  <hr>
+  <a href="{% url 'community:review_list'%}">back</a>
+  <hr>
+  {{ comments|length }}개의 댓글
+  {% for comment in comments %}
+    <li>{{ comment.content }}</li>
+  {% endfor %}
+  <form action="{% url 'community:create_comments' review.pk %}" method='POST'>
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button>submit comment</button>
+  </form>
+{% endblock  %}

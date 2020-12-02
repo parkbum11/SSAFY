@@ -1,0 +1,65 @@
+{
+  "adult": false,
+  "backdrop_path": "/fRGxZuo7jJUWQsVg9PREb98Aclp.jpg",
+  "belongs_to_collection": null,
+  "budget": 3300000,
+  "genres": [
+    {
+      "id": 18,
+      "name": "드라마"
+    },
+    {
+      "id": 10402,
+      "name": "음악"
+    }
+  ],
+  "homepage": "http://sonyclassics.com/whiplash/",
+  "id": 244786,
+  "imdb_id": "tt2582802",
+  "original_language": "en",
+  "original_title": "Whiplash",
+  "overview": "최고의 드러머가 되기 위해서라면 무엇이든 할 각오가 되어있는 음악대학 신입생 앤드류는 아무도 없는 지하실에서 혼자 드럼을 연습하던 중 우연한 기회로 누구든지 성공으로 이끄는 최고의 실력자이지만, 또한 동시에 최악의 폭군인 플렛처 교수에게 발탁되어 그의 밴드에 들어가게 된다. 설레는 마음으로 참가한 첫 연습에서, 그는 플렛처 교수의 진짜 얼굴을 마주치게 된다. 폭언과 학대 속에 좌절과 성취를 동시에 안겨주는 플렛처의 지독한 교육방식은 천재가 되길 갈망하는 앤드류의 집착을 끌어내며 그를 점점 광기로 몰아넣는데...",
+  "popularity": 38.807,
+  "poster_path": "/gPf4WobDrhz8SQZFYu9wCZa9mAT.jpg",
+  "production_companies": [
+    {
+      "id": 2266,
+      "logo_path": "/owzVs2mguyyJ3vIn7EbgowpUPnk.png",
+      "name": "Bold Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 3172,
+      "logo_path": "/kDedjRZwO8uyFhuHamomOhN6fzG.png",
+      "name": "Blumhouse Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 32157,
+      "logo_path": "/nBD7uzlUlpivUpOoUTg5UEZJoib.png",
+      "name": "Right of Way Films",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2014-10-10",
+  "revenue": 13092000,
+  "runtime": 107,
+  "spoken_languages": [
+    {
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Released",
+  "tagline": "천재를 갈망하는 광기가 폭발한다",
+  "title": "위플래쉬",
+  "video": false,
+  "vote_average": 8.4,
+  "vote_count": 9883
+}

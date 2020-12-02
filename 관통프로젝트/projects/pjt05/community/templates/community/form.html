@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 class="text-center">CREATE</h1>
+  <hr>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary btn-sm">Create</button>
+  </form>
+  <a href="{% url 'community:review_list' %}" class="btn btn-secondary btn-sm">Back</a>
+{% endblock content %}

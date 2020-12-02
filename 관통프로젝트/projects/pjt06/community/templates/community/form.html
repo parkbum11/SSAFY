@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+  <h1 class="text-center my-5">NEW REVIEW</h1>
+  <hr>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button type="submit" class="btn btn-primary btn-sm">Create</button>
+    <a href="{% url 'community:review_list' %}" class="btn btn-secondary btn-sm">Back</a>
+  </form>
+  
+{% endblock content %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Community</h1>
+  {% if user.is_authenticated %}
+    <a href="{% url 'community:create' %}">NEW</a>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">[새 글을 작성하려면 로그인하세요]</a>
+  {% endif %}
+  <hr>
+  {% for review in reviews %}
+    <p><b>작성자 : <a href="{% url 'accounts:profile' review.user.username %}">{{ review.user }}</a></b></p>
+    <p>글 번호: {{ review.pk }}</p>
+    <p>글 제목: {{ review.title }}</p>
+    <p>글 내용: {{ review.content }}</p>
+    <form class="d-inline like_form" data-community-id = '{{review.pk}}'>
+      {% csrf_token %}
+      {% if user in review.like_users.all %}
+        <button class="btn btn-link">
+          <i id="like-{{review.pk}}" class="fas fa-heart fa-lg" style="color:crimson;"></i>
+        </button>
+      {% else %}
+        <button class="btn btn-link">
+          <i id="like-{{review.pk}}" class="fas fa-heart fa-lg" style="color:black;"></i>
+        </button>
+      {% endif %}
+    </form>
+    <p>
+    <span id= "like-count-{{review.pk}}">{{ review.like_users.all|length }} 명이 이 글을 좋아합니다.<br></span>
+  
+    </p>
+    <a href="{% url 'community:detail' review.pk %}">[detail]</a>
+    <hr>
+  {% endfor %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+  const forms = document.querySelectorAll('.like_form')
+  
+  forms.forEach(function (form) {
+    form.addEventListener('submit', function(event) {
+      event.preventDefault()
+      const communityId = form.dataset.communityId
+      const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      axios.post(`http://127.0.0.1:8000/community/${communityId}/like/`, {}, 
+      {headers: {'X-CSRFToken': csrftoken}})
+      .then(function (res) { 
+        console.log(res)
+        const count = res.data.count
+        const liked = res.data.liked
+        const likeIconColor = document.querySelector(`#like-${communityId}`)
+        const likeCount = document.querySelector(`#like-count-${communityId}`)
+
+        if (liked) {
+          likeIconColor.style.color = 'crimson'
+        }else{
+          likeIconColor.style.color = 'black'
+        }
+        likeCount.innerText = `${count}명이 좋아합니다`
+
+        
+      })
+    })
+  })
+  </script>
+{% endblock %}

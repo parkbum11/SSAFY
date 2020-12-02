@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class='text-center'>DETAIL</h2>
+  <h3>No. {{ review.pk }}</h3>
+  <hr>
+  <p>Title : {{ review.title }}</p>
+  <p>movie Title : {{ review.movie_title }}</p>
+  <p>Content: {{ review.content }}</p>
+  <p>Rank: {{ review.rank }}</p>
+  <p>Created at: {{ review.created_at|date:"SHORT_DATE_FORMAT" }}</p>
+  <p>Updated at: {{ review.updated_at|date:"M j, Y" }}</p>
+  <hr>
+  <div class='d-flex'>
+    <a href="{% url 'community:update' review.pk %}" class='btn btn-primary mr-3'>edit</a>
+    <form action="{% url 'community:delete' review.pk %}" method="POST">
+      {% csrf_token %}
+      <button class='btn btn-primary mr-3'>delete</button>
+    </form>
+    <a href="{% url 'community:review_list'%}" class='btn btn-secondary'>back</a>
+  </div>
+{% endblock  %}

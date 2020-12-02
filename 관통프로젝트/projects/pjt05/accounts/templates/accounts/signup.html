@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class ="text-center">회원가입</h1>
+<form action="{% url 'accounts:signup' %}" method = 'POST'>
+{% csrf_token %}
+<<<<<<< HEAD
+=======
+{% comment %} {{form.as_p}} {% endcomment %}
+>>>>>>> bbb8a632ae3104d2f537215db8433283dd96034c
+<div class = 'container'>
+<div > <strong>사용자 이름</strong> <br> {{form.username}}
+</div>
+
+<div> <strong>비밀번호</strong> <br>{{form.password1}}</div>
+<div> <strong>비밀번호 확인</strong> <br>{{form.password2}}</div>
+<br>
+<button type= 'submit' class = 'btn btn-primary btn-md'>회원가입</button>
+</div>
+</form>
+{% endblock content %}

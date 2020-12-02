@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1 class="text-center my-5">Community</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Title</th>
+        <th scope="col">Movie Title</th>
+        <th scope="col">Rank</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for review in community %}
+        <tr>
+          <th scope="row">{{ review.pk }}</th>
+          <td><a href="{% url 'community:review_detail' review.pk %}">{{ review.title }}</a></td>
+          <td>{{ review.movie_title }}</td>
+          <td>{{ review.rank }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

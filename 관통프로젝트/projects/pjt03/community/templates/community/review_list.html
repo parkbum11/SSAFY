@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="my-5 display-3 text-center">Review List</h1>
+
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">title</th>
+      <th scope="col">rank</th>
+      <th scope="col">time</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for review in reviews %}
+    <tr>
+      <th scope="row">{{ review.pk }}</th>
+      <td><a href="{% url 'community:review_detail' review.pk %}">{{ review.title }}</a></td>
+      <td>{{ review.rank }}</td>
+      <td>{{ review.created_at }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+  </table>
+{% endblock content %}

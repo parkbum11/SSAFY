@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class = 'container'>
+<h1 class = 'text-center my-5'> <strong> {{person.username}}의 프로필 </strong></h1>
+<div class="container bg-danger">
+<h1 class = 'bg-dark text-white'>팔로워 수 = {{person.followers.all|length}}  | 팔로잉 수 = {{person.followings.all|length}}</h1>
+<div class='bg-secondary text-white'>
+<form action=" {% url 'accounts:follow' person.pk %}"method = 'POST'>
+{% csrf_token %}
+{% if request.user != person %}
+    {% if request.user in person.followers.all %}
+        <button>unfollow</button>
+    {% else %}
+        <button>follow</button>
+    {% endif %}
+{% endif %}
+</form>
+<h2>{{ person.username }}이 작성한 {{person.review_set.all|length}}개의 게시글</h2>
+{% for review in person.review_set.all %}
+  <div>{{review.pk}}번 글 - {{ review.title }}</div>
+{% endfor %}
+<hr>
+
+<h2>{{ person.username }}이 작성한 댓글 {{person.comment_set.all|length}}개의 댓글</h2> 
+{% for comment in person.comment_set.all %}
+  <div>{{review.pk}}번 글의 댓글 - {{ comment.content }}</div>
+{% endfor %}
+<hr>
+
+<h2>{{ person.username }}이 좋아요 한  {{person.like_review.all|length}} 개의 게시글</h2>
+{% for review in person.like_review.all %}
+<ol>
+  <p><div>{{review.pk}}번 글 - {{ review.title }}</div></p>
+</ol>
+{% endfor %}
+<hr>
+</div>
+
+</div>
+</div>
+
+<a href="{% url 'community:review_list' %}">[BACK]</a>
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="my-5 display-3 text-center">Create Review</h1>
+  <hr>
+  <form action="{% url 'community:create' %}" method="POST">
+    {% csrf_token %}
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="rank">Rank</label>
+        <input type="number" class="form-control" id="rank" min='0' max='10'>
+      </div>
+    </div>
+    
+
+    <br>
+    <label for="content">Content : </label>
+    <textarea name="content" id="content" cols="30" rows="10"></textarea><br>
+    
+    <br>
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+  <hr>
+  <a href="{% url 'community:review_list'  %}" class='btn btn-secondary mb-3'>back</a>
+{% endblock content %}

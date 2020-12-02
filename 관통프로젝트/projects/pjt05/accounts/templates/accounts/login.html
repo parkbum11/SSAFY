@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class ="text-center">LogIn</h1>
+<form action="{% url 'accounts:login' %}" method = 'POST'>
+    {% csrf_token %}
+<<<<<<< HEAD
+=======
+    {% comment %} {{form.as_p}} {% endcomment %}
+>>>>>>> bbb8a632ae3104d2f537215db8433283dd96034c
+    <div > <strong>아이디</strong> <br> {{form.username}}
+    </div>
+    <div > <strong>비밀번호</strong> <br> {{form.password}}
+    </div>
+<br>
+<button type="submit" class="btn btn-primary btn-md">LogIn</button>
+</form>
+{% endblock content %}

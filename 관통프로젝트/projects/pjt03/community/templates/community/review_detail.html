@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+  <h1 class="display-4 my-5 text-center">Detail</h1>
+  <h1>{{ review.title }}<span class="badge badge-primary">{{ review.rank }}</span></h1>
+  <hr>
+  <p>글 내용: {{ review.content }}</p>
+  <p>작성 시간: {{ review.created_at|naturaltime }}</p>
+
+  <a href="{% url 'community:review_list' %}" class='btn btn-secondary'>목록으로 가기</a>
+{% endblock content %}
