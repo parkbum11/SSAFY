@@ -1,27 +1,27 @@
 import sys
 sys.stdin = open('input.txt', 'r')
 
-def BFS(v):
-    flag = True
-    q = [(v, 0)]
-    while q:
-        curr_v, curr_count = q.pop(0)
-        visited[curr_v] = 1
-        for i in range(N + 1):
-            if visited[i] == 0 and family[curr_v][i] == 1:
-                if i == b:
-                    return curr_count + 1
-                else:
-                    q.append((i, curr_count + 1))
-    return -1
-N = int(input())
-a, b = map(int, input().split())
-M = int(input())
-family = [[0]*(N+1) for _ in range(N+1)]
-visited = [0]*(N+1)
-for i in range(M):
-    c, d = map(int, input().split())
-    family[c][d] = family[d][c] = 1
-count = 0
-ans = BFS(a)
-print(ans)
+from collections import deque
+def bfs():
+    Q=deque()
+    Q.append(info[0])
+    visited[0]=True
+
+    while Q:
+        p_x,p_y = Q.popleft()
+        if p_x == info[-1][0] and p_y == info[-1][1]:
+            return 'happy'
+        for idx,(n_x,n_y) in enumerate(info):
+            if not visited[idx] and abs(p_x-n_x) + abs(p_y-n_y)<=50*20:
+                Q.append((n_x,n_y))
+                visited[idx]=True
+    return 'sad'
+
+for tc in range(int(input())):
+    N=int(input())
+    info=[]
+    visited = [False]*(N+2)
+    for _ in range(N+2):
+        a,b=map(int,input().split())
+        info.append((a,b))
+    print(bfs())

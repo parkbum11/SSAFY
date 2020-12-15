@@ -1,2 +1,3 @@
-print('#{}'.format(t), end=' ')
-print(' ', end=' ')
+a = [9, 8, 7]
+for i, j in enumerate(a):
+    print(i, j)
